@@ -13,7 +13,14 @@
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.cruds.frs*" />
 
+
 	<bean id="flightDAO" class="com.cruds.frs.db.FlightDAOImpl">
+		<property name="sessionfactory">
+			<ref bean="sessionfactory" />
+		</property>
+	</bean>
+	
+	<bean id="routeDAO" class="com.cruds.frs.db.RouteDAOImpl">
 		<property name="sessionfactory">
 			<ref bean="sessionfactory" />
 		</property>

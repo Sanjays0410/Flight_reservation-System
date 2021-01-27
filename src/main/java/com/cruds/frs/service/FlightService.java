@@ -28,7 +28,7 @@ public class FlightService {
 		return flightDAO.removeFlight(flightID);
 	}
 	
-	public boolean  modifyFlight(Flight flightbean)
+	public boolean modifyFlight(Flight flightbean)
 	{
 		return flightDAO.modifyFlight(flightbean);
 	}

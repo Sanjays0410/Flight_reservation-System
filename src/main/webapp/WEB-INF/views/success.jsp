@@ -10,5 +10,7 @@
 
 <h1>SUCCESS</h1>
 
+<a href="index.jsp"> <input type="submit" value="BACK"/></a>
+
 </body>
 </html>

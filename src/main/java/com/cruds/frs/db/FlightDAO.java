@@ -13,6 +13,8 @@ public interface FlightDAO {
 	
 	public int removeFlight(String flightID);
 	
-	public boolean modifyFlight(Flight flightBean);
+	
+	//return type changes
+	public boolean modifyFlight(Flight flightbean);
 
 }

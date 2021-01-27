@@ -21,6 +21,15 @@ public class Flight {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	
+	public Flight(String flightid) {
+		super();
+		this.flightid = flightid;
+	}
+
+
+
 	public Flight(String flightid, String flightname, int seatingcapacity, int reservationcapacity) {
 		super();
 		this.flightid = flightid;

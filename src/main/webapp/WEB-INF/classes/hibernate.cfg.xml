@@ -6,6 +6,8 @@
     <session-factory>
     
       <mapping class="com.cruds.frs.entity.Flight"/>
+      
+         <mapping class="com.cruds.frs.entity.Route"/>
        	
     </session-factory>
 
