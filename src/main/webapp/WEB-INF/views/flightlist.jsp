@@ -10,14 +10,52 @@
 <body>
 <div align="center">
 
+
+
+<style>
+
+body
+{
+ background-color: lightgrey;
+}
+table {
+  border-collapse: collapse;
+  width: 75%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: green;
+  color: white;
+}
+</style>
+
+
+
+
+
+
+
+
+<h1> FLIGHT LIST</h1>
+
 	<table border="1" bordercolor="blue">
 
 		<thead>
 			<tr>
-				<td>FLIHT ID</td>
-				<td>FLIGHT NAME</td>
-				<td>SEATING CAPACITY</td>
-				<td>RESERVATION CAPACITY</td>
+				<th>FLIHT ID</th>
+				<th>FLIGHT NAME</th>
+				<th>SEATING CAPACITY</th>
+				<th>RESERVATION CAPACITY</th>
+				<th>--ACTION DELETE--</th>
+				<th>--ACTION MODIFY--</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -47,7 +85,7 @@
 	
 	
 	<%
-		String msg =(String)session.getAttribute("MESSAGE");
+		String msg =(String)request.getAttribute("MESSAGE");
 	
 
 		if (msg != null) {

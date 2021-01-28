@@ -56,7 +56,7 @@ public class FlightController {
 		}
 		else
 		{
-			request.setAttribute("MESSAGE","Inseration Failed");
+			request.setAttribute("MESSAGE","Insertion Failed  duplicate key!!\n"+flightid+"\nalready there");
 			return "flight";
 		}
 		}
@@ -90,8 +90,8 @@ public class FlightController {
 		
 		session.setAttribute("flightid",flightid);
 		session.setAttribute("flightname",flightname);
-		session.setAttribute("seatingcapacity",Integer.valueOf(seatingcapacity));
-		session.setAttribute("reservationcapacity",Integer.valueOf(reservationcapacity));
+		session.setAttribute("seatingcapacity",seatingcapacity);
+		session.setAttribute("reservationcapacity",reservationcapacity);
 			
 
 		//jsp
@@ -100,7 +100,7 @@ public class FlightController {
 	} 
 	@RequestMapping(value="/flightdel",method=RequestMethod.GET)
 	public String getflightDeleteform( 
-			HttpServletRequest request,HttpSession session)
+			HttpServletRequest request,HttpSession session,Model model)
 	{
 		
 		 String flightid=(String)session.getAttribute("flightid");
@@ -116,8 +116,10 @@ public class FlightController {
 			session.removeAttribute("reservationcapacity");
 		*/
 			
-			session.invalidate();
-			return "flightdel";
+			//session.invalidate();
+			
+			model.addAttribute("FLIGHT_LIST",service.viewByAllFlights());
+			return "flightlist";
 		}
 		
 		else
@@ -161,7 +163,7 @@ public class FlightController {
 	}
 	
 	@RequestMapping(value="/flightmodify",method=RequestMethod.POST)
-	public String domodifyflight(HttpSession session,HttpServletRequest request)
+	public String domodifyflight(HttpSession session,HttpServletRequest request,Model model)
 	{
 		
 		 String flightid=(String)session.getAttribute("flightid");
@@ -169,13 +171,17 @@ public class FlightController {
 		 String seatingcapacity=request.getParameter("seatingcapacity");
 		 String reservationcapacity=request.getParameter("reservationcapacity");
 		 
-		 Flight flightbean=new Flight(flightid, flightname, Integer.valueOf(seatingcapacity),  Integer.valueOf(reservationcapacity));
+		
+		 
+		 Flight flightbean=new Flight(flightid, flightname, Integer.valueOf(seatingcapacity), Integer.valueOf(reservationcapacity));
 		 System.out.println(flightbean);
 		if(service.modifyFlight(flightbean))
 		{
-			session.setAttribute("MESSAGE","Updated Success");
+			request.setAttribute("MESSAGE","Updated Success");
 			//session.invalidate();
-			return "redirect:flightlist";
+			model.addAttribute("FLIGHT_LIST",service.viewByAllFlights());
+
+			return "flightlist";
 			
 		}
 		else

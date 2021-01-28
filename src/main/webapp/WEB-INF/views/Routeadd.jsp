@@ -14,6 +14,7 @@
 			<label>Rouite id :</label> <input type="text" name="routeid" required />
 			<br> <br> <label>Choose a Source:</label> <select
 				name="source" id="source" required>
+				<option> </option>
 				<option value="Banglore">Banglore</option>
 				<option value="Chennai">Chennai</option>
 				<option value="Delhi">Delhi</option>
@@ -22,6 +23,7 @@
 				<option value="Rajasthan">Rajasthan</option>
 			</select> <br> <br> <label>Choose a Destination:</label> <select
 				name="destination" id="destination" required>
+				<option> </option>
 				<option value="Banglore">Banglore</option>
 				<option value="Chennai">Chennai</option>
 				<option value="Delhi">Delhi</option>
@@ -42,7 +44,10 @@
 		<h1>
 			<%=msg %></h1>
 		<%} %>
+<br>
+<br>
 
+<a href="index.jsp"> <input type="submit" value="BACK"/></a>
 	</div>
 </body>
 </html>

@@ -61,12 +61,56 @@ public class RouteDAOImpl implements RouteDAO {
 	public ArrayList<Route> viewByAllRoute() {
 	
 		Session session=sessionfactory.openSession();
-		session.getTransaction();
+		session.beginTransaction();
 		 ArrayList<Route> routelist=(ArrayList<Route>) session.createQuery("from Route").list();
-		 session.beginTransaction().commit();
+		 session.getTransaction().commit();
 		 session.close();
 		 
 		return routelist;
 	}
+
+	public int removeRoute(String routeId) {
+		
+		Session session=sessionfactory.openSession();
+		session.beginTransaction();
+		try
+		{
+		 Route routebean=(Route) session.load(Route.class,routeId);
+		session.delete(routebean);
+		session.getTransaction().commit();
+		session.close();
+		return 1;
+		}
+		catch ( java.lang.IllegalArgumentException e) {
+
+			System.out.println("null pointer exception"+e.getMessage());
+			// TODO: handle exception
+			return 0;
+		}
+	}
+
+	public boolean modifyRoute(Route routebean) {
+		
+		
+		Session session=sessionfactory.openSession();
+		session.beginTransaction();
+		try
+		{
+		session.update(routebean);
+		session.getTransaction().commit();
+		session.close();
+		return true;
+		}
+		catch ( java.lang.NumberFormatException e) {
+
+			System.out.println("nullformat exception");
+			return false;
+		}
+		catch (org.hibernate.TransientObjectException e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
+	
 
 }

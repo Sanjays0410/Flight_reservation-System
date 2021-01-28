@@ -8,15 +8,58 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
+<style>
+
+body
+{
+ background-color: lightgrey;
+}
+table {
+  border-collapse: collapse;
+  width: 75%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: green;
+  color: white;
+}
+
+marquee
+{
+background-color:orange;
+}
+</style>
+
+
 	<div align="center">
+	
+	<h1> FLIGHT DELETE</h1>
+	<br>
+	<br>
+	
+	<marquee behavior="scroll" direction="left">DO U WANT TO DELETE FLIGHT... ONCE DELETE CAN BE GET!  </marquee>
+	<br>
+	<br>
+	
 	<table border="1" bordercolor="blue">
 
 		<thead>
 			<tr>
-				<td>FLIHT ID</td>
-				<td>FLIGHT NAME</td>
-				<td>SEATING CAPACITY</td>
-				<td>RESERVATION CAPACITY</td>
+				<th>FLIHT ID</th>
+				<th>FLIGHT NAME</th>
+				<th>SEATING CAPACITY</th>
+				<th>RESERVATION CAPACITY</th>
+				<th>--ACTION DELETE--</th>
 			</tr>
 		</thead>
 		<tbody>

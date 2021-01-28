@@ -23,6 +23,14 @@ public class RouteService {
 		return routeDAO.viewByAllRoute();
 	}
 	
+	public int  removeRoute(String routeId)
+	{
+		return routeDAO.removeRoute(routeId);
+	}
+	public boolean modifyRoute(Route routeBean)
+	{
+		return routeDAO.modifyRoute(routeBean);
+	}
 	
 	
 }

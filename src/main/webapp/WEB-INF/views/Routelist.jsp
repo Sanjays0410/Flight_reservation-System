@@ -12,15 +12,42 @@
 		<h1>LIST ALL ROUTE</h1>
 
 
+<style>
+
+body
+{
+ background-color: lightgrey;
+}
+table {
+  border-collapse: collapse;
+  width: 75%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: green;
+  color: white;
+}
+</style>
+
 		<table border="1" bordercolor="blue">
 
 			<thead>
 				<tr>
-					<td>ROUTE ID</td>
-					<td>SOURCE</td>
-					<td>DESTINATION</td>
-					<td>DISTANCE</td>
-					<td>FARE</td>
+					<th>ROUTE ID</th>
+					<th>SOURCE</th>
+					<th>DESTINATION</th>
+					<th>DISTANCE</th>
+					<th>FARE</th>
+					<th>--ACTION--DELETE</th>
+					<th>--ACTION--MODIFY</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -32,8 +59,10 @@
 						<td>${r.destination}</td>
 						<td>${r.distance}</td>
 						<td>${r.fare}</td>
-						<td> <a href="Routedelete?Routeid=${r.routeid}&Source=${r.source}&Destination=${r.desination}&Distance=${r.distance}&Fare${r.fare}"
+						<td> <a href="Routedel?Routeid=${r.routeid}&Source=${r.source}&Destination=${r.destination}&Distance=${r.distance}&Fare=${r.fare}"
 							>DELETE </a></td>
+						<td> <a href="RouteModify?Routeid=${r.routeid}&Source=${r.source}&Destination=${r.destination}&Distance=${r.distance}&Fare=${r.fare}"
+							>Modify </a></td>
 
 
 
@@ -49,7 +78,7 @@
 
 
 		<%
-			String msg = (String) session.getAttribute("MESSAGE");
+			String msg = (String) request.getAttribute("MESSAGE");
 
 			if (msg != null) {
 		%>

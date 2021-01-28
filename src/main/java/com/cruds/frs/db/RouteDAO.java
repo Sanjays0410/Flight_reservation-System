@@ -10,5 +10,7 @@ public interface RouteDAO {
 	
 	 public ArrayList<Route> viewByAllRoute();
 	 
-	// public int removeRoute(String routeId);
+	 public int removeRoute(String routeId);
+	 
+	 public boolean modifyRoute(Route routebean);
 }

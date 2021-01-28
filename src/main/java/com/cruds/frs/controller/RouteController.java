@@ -33,8 +33,10 @@ public class RouteController {
 	public String doRouteForm(@RequestParam("routeid") String routeid,@RequestParam("source") String source,@RequestParam("destination") String destination
 			,@RequestParam("distance")int distance,@RequestParam("farepermile")int farepermile ,HttpServletRequest request)
 	{
+		
 		int fare=distance*farepermile;
 		System.out.println(fare);
+		
 		Route Routebean=new Route(routeid, source, destination, distance, fare);
 		System.out.println(Routebean);
 
@@ -55,7 +57,7 @@ public class RouteController {
 
 		else 
 		{
-			request.setAttribute("MESSAGE","Insertion Failed");
+			request.setAttribute("MESSAGE","Insertion Failed  duplicate key!!\n"+routeid+"\nalready there");
 			return "Routeadd";
 
 		}
@@ -71,7 +73,7 @@ public class RouteController {
 		
 	}
 	
-	@RequestMapping(value="/Routedelete",method=RequestMethod.GET)
+	@RequestMapping(value="/Routedel",method=RequestMethod.GET)
 	public String showDeletepage(HttpServletRequest request,HttpSession session)
 	{
 		String Routeid=request.getParameter("Routeid");
@@ -88,30 +90,31 @@ public class RouteController {
 		session.setAttribute("Fare",Integer.parseInt(Fare));
 		
 		
-		
 		return "Routedelete";
 		
 	}
 	
 	@RequestMapping(value="/Routedelete",method=RequestMethod.GET)
-	public String dodeleteRoute(HttpSession session,HttpServletRequest request)
+	public String dodeleteRoute(HttpSession session,HttpServletRequest request,Model model)
 	{
 		
-		 String flightid=(String)session.getAttribute("flightid");
-		 System.out.println(flightid);
+		 String routeid=(String)session.getAttribute("Routeid");
+		 System.out.println(routeid);
 		
 		
-		/*if(service.(flightid)!=0)
+		if(service.removeRoute(routeid)!=0)
 		{
 			request.setAttribute("MESSAGE", "succuessfully deleted");
-			session.removeAttribute("flightid");
-			session.removeAttribute("flightname");
+			/*session.removeAttribute("Routeid");
+			session.removeAttribute("f");
 			session.removeAttribute("seatingcapacity");
-			session.removeAttribute("reservationcapacity");
+			session.removeAttribute("reservationcapacity");*/
 		
 			
-			session.invalidate();
-			return "Routedelete";
+			//session.invalidate();
+			model.addAttribute("ROUTE_LIST",service.viewByAllRoute());
+			return "Routelist";
+			
 		}
 		
 		else
@@ -119,11 +122,72 @@ public class RouteController {
 			request.setAttribute("MESSAGE", "unsuccessfull delete");
 			return "Routedelete";
 			
-		}*/
-		
-		return "Routedelete";
+		}
 		
 	}
+	
+	@RequestMapping(value="/RouteModify",method=RequestMethod.GET)
+	public String showroutemodifyform( HttpServletRequest request,HttpSession session)
+	{
+		String Routeid=request.getParameter("Routeid");
+		String Source=request.getParameter("Source");
+		String Destination=request.getParameter("Destination");
+		String Distance=request.getParameter("Distance");
+		String Fare=request.getParameter("Fare");
+		
+		
+		session.setAttribute("Routeid",Routeid);
+		session.setAttribute("Source",Source);
+		session.setAttribute("Destination",Destination);
+		session.setAttribute("Distance",Distance);
+		session.setAttribute("Fare",Fare);
+		
+		return "Routemodify";
+			
+	}
+	
+	@RequestMapping(value="Routemodify",method=RequestMethod.POST)
+	public String doRoutemodifyform(HttpSession session ,HttpServletRequest request,Model model )
+	{
+		String Routeid=(String) session.getAttribute("Routeid");
+		String Source=request.getParameter("Source");
+		String Destination=request.getParameter("Destination");
+		String Distance=request.getParameter("Distance");
+		String Fare=request.getParameter("Fare");
+		
+		
+		String sessionfare=(String) session.getAttribute("Fare");
+		
+		System.out.println(sessionfare);
+		
+		Route routebean=new Route(Routeid, Source,Destination,Integer.valueOf( Distance), Integer.valueOf(Fare));
+		
+		System.out.println(routebean);
+		 if(Source.equals(Destination))
+			{
+				request.setAttribute("MESSAGE", "please change source or destination ");
+				return "Routemodify";
+
+			}
+		
+		else if(service.modifyRoute(routebean))
+		{
+			request.setAttribute("MESSAGE","Updated Success");
+			//session.invalidate();
+			model.addAttribute("ROUTE_LIST",service.viewByAllRoute());
+			return "Routelist";
+			
+		}
+		else
+		{
+			request.setAttribute("MESSAGE","Updated Failed");
+			return "redirect:Routemodify";
+			
+		}
+		
+		
+	}
+	
 	
 	
 

@@ -18,6 +18,7 @@
 		<label> FLIGHT ID:</label> <input type="text" name="flightid" required/> <br>
 		</br> <label for="flightname">Choose a Flight:</label> <select
 			name="flightname" id="flightname" required>
+			<option> </option>
 			<option value="IndiGo">IndiGo</option>
 			<option value="Air India">Air India</option>
 			<option value="SpiceJet">SpiceJet</option>
