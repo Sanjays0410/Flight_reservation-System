@@ -9,6 +9,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
+<style>
+
+body
+{
+ background-color: lightgrey;
+}
+</style>
 	<div align="center">
 		<h1>FLIGHT DATA MODIFY</h1>
 

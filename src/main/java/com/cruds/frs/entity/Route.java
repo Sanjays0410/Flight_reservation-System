@@ -25,6 +25,16 @@ public class Route {
 	public Route() {
 		// TODO Auto-generated constructor stub
 	}
+	
+
+
+	public Route(String routeid) {
+		super();
+		Routeid = routeid;
+	}
+
+
+
 
 	public Route(String routeid, String source, String destinstion, int distance, int fare) {
 		super();
@@ -79,8 +89,7 @@ public class Route {
 
 	@Override
 	public String toString() {
-		return "Route [Routeid=" + Routeid + ", Source=" + Source + ", Destination=" + Destination + ", Distance="
-				+ Distance + ", fare=" + fare + "]";
+		return  Routeid ;
 	}
 
 	

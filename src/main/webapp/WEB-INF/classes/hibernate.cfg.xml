@@ -37,6 +37,9 @@
       
          <mapping class="com.cruds.frs.entity.Route"/>
          
+         <mapping class="com.cruds.frs.entity.Schedule"/>
+         
+         
      	
     </session-factory>
 

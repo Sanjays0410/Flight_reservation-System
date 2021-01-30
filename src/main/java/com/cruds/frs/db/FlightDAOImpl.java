@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cruds.frs.entity.Flight;
-import com.cruds.frs.exception.SMSException;
+import com.cruds.frs.exception.FRSException;
 
 @Repository
 public class FlightDAOImpl  implements FlightDAO{
@@ -39,16 +39,16 @@ public class FlightDAOImpl  implements FlightDAO{
 			return "success";
 
 		}
-		catch (SMSException e) {
+		catch (FRSException e) {
 		// TODO: handle exception
 		e.printStackTrace();
 		if(e.getMessage().contains("Duplicate"))
 		{
-			throw new SMSException(flightBean.getFlightid() +" already exists! duplicate entry");
+			throw new FRSException(flightBean.getFlightid() +" already exists! duplicate entry");
 		}
 		else
 		{   
-			throw new SMSException(e.getMessage() +"please contact system admin");
+			throw new FRSException(e.getMessage() +"please contact system admin");
 		}
 	}
 		catch (org.hibernate.exception.ConstraintViolationException e) {

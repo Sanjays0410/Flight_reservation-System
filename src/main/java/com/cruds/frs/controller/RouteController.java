@@ -31,11 +31,8 @@ public class RouteController {
 
 	@RequestMapping(value="/Routeadd",method=RequestMethod.POST)
 	public String doRouteForm(@RequestParam("routeid") String routeid,@RequestParam("source") String source,@RequestParam("destination") String destination
-			,@RequestParam("distance")int distance,@RequestParam("farepermile")int farepermile ,HttpServletRequest request)
+			,@RequestParam("distance")int distance,@RequestParam("fare")int fare ,HttpServletRequest request)
 	{
-		
-		int fare=distance*farepermile;
-		System.out.println(fare);
 		
 		Route Routebean=new Route(routeid, source, destination, distance, fare);
 		System.out.println(Routebean);
@@ -49,7 +46,7 @@ public class RouteController {
 	  else if(service.addRoute(Routebean)!=null)
 
 		{
-			request.setAttribute("MESSAGE","Insertion Successfully ");
+			request.setAttribute("MESSAGE","Insertion Success ");
 
 			return "Routeadd";
 
@@ -105,11 +102,6 @@ public class RouteController {
 		if(service.removeRoute(routeid)!=0)
 		{
 			request.setAttribute("MESSAGE", "succuessfully deleted");
-			/*session.removeAttribute("Routeid");
-			session.removeAttribute("f");
-			session.removeAttribute("seatingcapacity");
-			session.removeAttribute("reservationcapacity");*/
-		
 			
 			//session.invalidate();
 			model.addAttribute("ROUTE_LIST",service.viewByAllRoute());
@@ -187,13 +179,6 @@ public class RouteController {
 		
 		
 	}
+
 	
-	
-	
-
-
-
-
-
-
 }

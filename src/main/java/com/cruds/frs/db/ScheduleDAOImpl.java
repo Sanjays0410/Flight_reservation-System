@@ -7,11 +7,11 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.cruds.frs.entity.Route;
+import com.cruds.frs.entity.Schedule;
 import com.cruds.frs.exception.FRSException;
 
 @Repository
-public class RouteDAOImpl implements RouteDAO {
+public class ScheduleDAOImpl implements ScheduleDAO {
 	
 	
 	@Autowired
@@ -22,13 +22,15 @@ public class RouteDAOImpl implements RouteDAO {
 		this.sessionfactory = sessionfactory;
 	}
 
-	public String addRoute(Route Routebean) {
+	public String addSchedule(Schedule scheduleBean) {
 		
 		Session session=sessionfactory.openSession();
 		session.beginTransaction();
 		try
 		{
-		session.save(Routebean);
+			
+		
+		session.save(scheduleBean);
 		session.getTransaction().commit();
 		session.close();
 		return "success";
@@ -38,7 +40,7 @@ public class RouteDAOImpl implements RouteDAO {
 			e.printStackTrace();
 			if(e.getMessage().contains("Duplicate"))
 			{
-				throw new FRSException(Routebean.getRouteid() +" already exists! duplicate entry");
+				throw new FRSException(scheduleBean.getScheduleid() +" already exists! duplicate entry");
 			}
 			else
 			{   
@@ -47,56 +49,53 @@ public class RouteDAOImpl implements RouteDAO {
 		}
 			catch (org.hibernate.exception.ConstraintViolationException e) {
 				// TODO: handle exception
-				System.out.println("duplicate entry not possible");
+				System.out.println("duplicate entry or flight id not there or route id not there");
 
 			}
-		catch (org.hibernate.exception.GenericJDBCException e) {
-			// TODO: handle exception
-			System.out.println("error");
-		}
 			return null;
-
 	}
 
-	public ArrayList<Route> viewByAllRoute() {
-	
+	public ArrayList<Schedule> viewByAllSchedule() {
+		
 		Session session=sessionfactory.openSession();
 		session.beginTransaction();
-		 ArrayList<Route> routelist=(ArrayList<Route>) session.createQuery("from Route").list();
-		 session.getTransaction().commit();
-		 session.close();
-		 
-		return routelist;
+		ArrayList<Schedule>  slist=(ArrayList<Schedule>) session.createQuery("from Schedule").list();
+		session.getTransaction().commit();
+		session.close();
+		return slist;
 	}
 
-	public int removeRoute(String routeId) {
+	public int removeSchedule(String scheduleId) {
 		
 		Session session=sessionfactory.openSession();
 		session.beginTransaction();
 		try
 		{
-		 Route routebean=(Route) session.load(Route.class,routeId);
-		session.delete(routebean);
-		session.getTransaction().commit();
-		session.close();
+		 Schedule schedulebean=(Schedule) session.load(Schedule.class,scheduleId);
+		 session.delete(schedulebean);
+		 session.getTransaction().commit();
+		 session.close();
 		return 1;
 		}
-		catch ( java.lang.IllegalArgumentException e) {
+		catch ( java.lang.NumberFormatException e) {
 
-			System.out.println("null pointer exception"+e.getMessage());
+			System.out.println("nullformat exception");
+			return 0;
+		}
+		catch (org.hibernate.TransientObjectException e) {
 			// TODO: handle exception
 			return 0;
 		}
+		
 	}
 
-	public boolean modifyRoute(Route routebean) {
-		
+	public boolean modifySchedule(Schedule scheduleBean) {
 		
 		Session session=sessionfactory.openSession();
 		session.beginTransaction();
 		try
 		{
-		session.update(routebean);
+		session.update(scheduleBean);
 		session.getTransaction().commit();
 		session.close();
 		return true;
@@ -111,6 +110,7 @@ public class RouteDAOImpl implements RouteDAO {
 			return false;
 		}
 	}
+	
 	
 
 }

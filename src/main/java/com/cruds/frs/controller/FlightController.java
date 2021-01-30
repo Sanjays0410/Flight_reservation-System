@@ -14,7 +14,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cruds.frs.entity.Flight;
-import com.cruds.frs.exception.SMSException;
+import com.cruds.frs.exception.FRSException;
 import com.cruds.frs.service.FlightService;
 
 import javassist.bytecode.stackmap.BasicBlock.Catch;
@@ -46,12 +46,19 @@ public class FlightController {
 
 
 		System.out.println(flightBean); 
-		
-		if( flightBean!=null&&service.addFlight(flightBean)!=null)
+
+		if(seatingcapacity<reservationcapacity)
 		{	
+			request.setAttribute("MESSAGE","Reservation capacity is more than Seating capacity are u a idiot to enter like that " );
+			return "flight";
+
+		}
+		else if(flightBean!=null&&service.addFlight(flightBean)!=null)
+		{
 			request.setAttribute("MESSAGE","Inseration Success");
-			redirectattribute.addFlashAttribute("MESSAGE","Inseration Success");
-			return "redirect:flight";
+
+			return "flight";
+
 
 		}
 		else
@@ -59,10 +66,10 @@ public class FlightController {
 			request.setAttribute("MESSAGE","Insertion Failed  duplicate key!!\n"+flightid+"\nalready there");
 			return "flight";
 		}
-		}
-	
-	
-		
+	}
+
+
+
 
 	@RequestMapping(value="/flightlist",method=RequestMethod.GET)
 	public String viewallflights(Model model)
@@ -75,24 +82,24 @@ public class FlightController {
 	}
 
 	//@RequestMapping(value="/flightdelete",method=RequestMethod.GET)
-	
-	
+
+
 	@RequestMapping(value="/flightdelete",method=RequestMethod.GET)
 	public String showflightdeleteform( HttpServletRequest request,HttpSession session)
 	{
-		
-	//	model.addAttribute("FLIGHT_LIST",service.viewByAllFlights());
-		
+
+		//	model.addAttribute("FLIGHT_LIST",service.viewByAllFlights());
+
 		String flightid=request.getParameter("flightid");
 		String flightname=request.getParameter("flightname");
 		String seatingcapacity=request.getParameter("seatingcapacity");
 		String reservationcapacity=request.getParameter("reservationcapacity");
-		
+
 		session.setAttribute("flightid",flightid);
 		session.setAttribute("flightname",flightname);
 		session.setAttribute("seatingcapacity",seatingcapacity);
 		session.setAttribute("reservationcapacity",reservationcapacity);
-			
+
 
 		//jsp
 		return "flightdel";
@@ -102,11 +109,11 @@ public class FlightController {
 	public String getflightDeleteform( 
 			HttpServletRequest request,HttpSession session,Model model)
 	{
-		
-		 String flightid=(String)session.getAttribute("flightid");
-		 System.out.println(flightid);
-		
-		
+
+		String flightid=(String)session.getAttribute("flightid");
+		System.out.println(flightid);
+
+
 		if(service.removeFlight(flightid)!=0)
 		{
 			request.setAttribute("MESSAGE", "succuessfully deleted");
@@ -114,67 +121,67 @@ public class FlightController {
 			session.removeAttribute("flightname");
 			session.removeAttribute("seatingcapacity");
 			session.removeAttribute("reservationcapacity");
-		*/
-			
+			 */
+
 			//session.invalidate();
-			
+
 			model.addAttribute("FLIGHT_LIST",service.viewByAllFlights());
 			return "flightlist";
 		}
-		
+
 		else
 		{
 			request.setAttribute("MESSAGE", "unsuccessfull delete");
 			return "flightdel";
-			
+
 		}
-		
-		 
-		
+
+
+
 		/*}
 		catch (SMSException e) {
 			// TODO: handle exception 
 			 request.setAttribute("MESSAGE",e.getInfo());
 		}
 		return "flightdel";*/
-	
+
 	}
-	
+
 
 
 	@RequestMapping(value="/flightmodify",method=RequestMethod.GET)
 	public String getModifyform(HttpServletRequest request,HttpSession session)
 	{
-		
+
 		String flightid=request.getParameter("flightid");
 		String flightname=request.getParameter("flightname");
 		String seatingcapacity=request.getParameter("seatingcapacity");
 		String reservationcapacity=request.getParameter("reservationcapacity");
-		
+
 		session.setAttribute("flightid",flightid);
 		session.setAttribute("flightname",flightname);
 		session.setAttribute("seatingcapacity",seatingcapacity);
 		session.setAttribute("reservationcapacity",reservationcapacity);
-	
+
 
 		return "flightmodify";
 
- 
+
 	}
-	
+
 	@RequestMapping(value="/flightmodify",method=RequestMethod.POST)
 	public String domodifyflight(HttpSession session,HttpServletRequest request,Model model)
 	{
-		
-		 String flightid=(String)session.getAttribute("flightid");
-		 String flightname=request.getParameter("flightname");
-		 String seatingcapacity=request.getParameter("seatingcapacity");
-		 String reservationcapacity=request.getParameter("reservationcapacity");
-		 
-		
-		 
-		 Flight flightbean=new Flight(flightid, flightname, Integer.valueOf(seatingcapacity), Integer.valueOf(reservationcapacity));
-		 System.out.println(flightbean);
+
+		String flightid=(String)session.getAttribute("flightid");
+		String flightname=request.getParameter("flightname");
+		String seatingcapacity=request.getParameter("seatingcapacity");
+		String reservationcapacity=request.getParameter("reservationcapacity");
+
+
+
+		Flight flightbean=new Flight(flightid, flightname, Integer.valueOf(seatingcapacity), Integer.valueOf(reservationcapacity));
+		System.out.println(flightbean);
 		if(service.modifyFlight(flightbean))
 		{
 			request.setAttribute("MESSAGE","Updated Success");
@@ -182,19 +189,19 @@ public class FlightController {
 			model.addAttribute("FLIGHT_LIST",service.viewByAllFlights());
 
 			return "flightlist";
-			
+
 		}
 		else
 		{
 			request.setAttribute("MESSAGE","Updated Failed");
 			return "redirect:flightmodify";
-			
+
 		}
-	
-		
-		
-		
-		
+
+
+
+
+
 	}
 
 

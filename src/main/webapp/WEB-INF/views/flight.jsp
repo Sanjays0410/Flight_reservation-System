@@ -10,6 +10,14 @@
 </head>
 <body>
 
+<style>
+
+body
+{
+ background-color: lightgrey;
+}
+</style>
+
 <div align="center">
 
 	<h1>FLIGHT PAGE</h1>
@@ -24,12 +32,12 @@
 			<option value="SpiceJet">SpiceJet</option>
 			<option value="GoAir">GoAir</option>
 			<option value="AirAsia India">AirAsia India</option>
-		</select> <br> </br> <label> Seating Capacity</label> <input type="text"
-			name="seatingcapacity" required /> <br> </br> <label>Reservation
-			Capacity</label> <input type="text" name="reservationcapacity" required /> <br> </br>
+		</select> <br> </br> <label> Seating Capacity</label> <input type="number"
+			name="seatingcapacity" placeholder="only numberic are aloow" required /> <br> </br> <label>Reservation
+			Capacity</label> <input type="number" name="reservationcapacity" placeholder="only numberic are allow" required /> <br> </br>
 		<input type="submit" value="ADD" />
 		
-
+		
 	</form>
 	<br>
 	<br>

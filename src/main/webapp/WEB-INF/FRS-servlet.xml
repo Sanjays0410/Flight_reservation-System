@@ -19,12 +19,26 @@
 			<ref bean="sessionfactory" />
 		</property>
 	</bean>
-	
+
 	<bean id="routeDAO" class="com.cruds.frs.db.RouteDAOImpl">
 		<property name="sessionfactory">
 			<ref bean="sessionfactory" />
 		</property>
 	</bean>
+
+
+	<bean id="scheduleDAO" class="com.cruds.frs.db.ScheduleDAOImpl">
+		<property name="sessionfactory">
+			<ref bean="sessionfactory" />
+		</property>
+	</bean>
+
+	<bean id="customerDAO" class="com.cruds.frs.db.CustomerDAOImpl">
+		<property name="sessionfactory">
+			<ref bean="sessionfactory" />
+		</property>
+	</bean>
+
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

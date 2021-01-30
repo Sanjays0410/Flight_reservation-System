@@ -70,10 +70,13 @@ public class Flight {
 		this.reservationcapacity = reservationcapacity;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "Flight [flightid=" + flightid + ", flightname=" + flightname + ", seatingcapacity=" + seatingcapacity
-				+ ", reservationcapacity=" + reservationcapacity + "]";
+		return flightid;
 	}
+
+	
 	
 }

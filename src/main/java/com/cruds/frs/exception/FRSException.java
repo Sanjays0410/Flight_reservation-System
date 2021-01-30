@@ -1,10 +1,10 @@
 package com.cruds.frs.exception;
 
-public class SMSException extends RuntimeException {
+public class FRSException extends RuntimeException {
 	
 	private String info;
 
-	public SMSException(String info) {
+	public FRSException(String info) {
 		super();
 		this.info = info;
 	}

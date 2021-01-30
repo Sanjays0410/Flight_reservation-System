@@ -7,6 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
+<style>
+
+body
+{
+ background-color: lightgrey;
+}
+</style>
 	<div align="center">
 
 

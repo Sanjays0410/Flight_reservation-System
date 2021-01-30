@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,22 +8,12 @@
 </head>
 <body>
 
-<style>
+<div align="center">
+<h1>CUSTOMER PAGE</h1>
 
-body
-{
- background-color: lightgrey;
-}
-</style>
-
-
-	<div align="center">
-		<h1>ROUTE DETAILS</h1>
-
-		<form action="Routeadd" method="post">
-			<label>Rouite id :</label> <input type="text" name="routeid" required />
-			<br> <br> <label>Choose a Source:</label> <select
-				name="source" id="source" required>
+<form action="Customersearch.html" method="post">
+<label>Choose a Source:</label> <select
+				name="Source" id="Source" required>
 				<option> </option>
 				<option value="Banglore">Banglore</option>
 				<option value="Chennai">Chennai</option>
@@ -32,7 +22,7 @@ body
 				<option value="Kolkata">Kolkata</option>
 				<option value="Rajasthan">Rajasthan</option>
 			</select> <br> <br> <label>Choose a Destination:</label> <select
-				name="destination" id="destination" required>
+				name="Destination" id="Destination" required>
 				<option> </option>
 				<option value="Banglore">Banglore</option>
 				<option value="Chennai">Chennai</option>
@@ -40,14 +30,30 @@ body
 				<option value="Mumbai">Mumbai</option>
 				<option value="Kolkata">Kolkata</option>
 				<option value="Rajasthan">Rajasthan</option>
-			</select> <br> <br> <label> Distance:</label> <input type="number"
-				name="distance"  placeholder="only numberic values are allowed" required /> <br> <br> <label>ENTER
-				FARE :</label> <input type="text" name="fare" placeholder="only numberic values are allowed" required /> <br>
-			<br> <input type="submit" value="ADD" />
+			</select> <br> <br> 
+			<label for="Days">Choose Days: {to choose multiple days use ctrl} </label> 
+			<select
+				name="Days" id="Days" required multiple>
+				<option>  </option>
+				<option value="Monday">Monday</option>
+				<option value="Tuesday">Tuesday</option>
+				<option value="Wednesday">Wednesday</option>
+				<option value="Thursday">Thursday</option>
+				<option value="Friday">Friday</option>
+				<option value="Saturday">Saturday</option>
+				<option value="Sunday">Sunday</option>
+			</select>
+			<br>
+			<br>
+			<input type="submit" value="SEARCH"/>
 
-		</form>
 
-		<%String msg=(String)request.getAttribute("MESSAGE");
+
+</form>
+
+
+
+	<%String msg=(String)request.getAttribute("MESSAGE");
 	
 	if(msg!=null){%>
 
@@ -55,10 +61,11 @@ body
 			<%=msg %></h1>
 		<%} %>
 		
-<br>
-<br>
 
-<a href="index.jsp"> <input type="submit" value="BACK"/></a>
-	</div>
+
+
+
+</div>
+
 </body>
 </html>

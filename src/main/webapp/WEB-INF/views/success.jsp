@@ -10,6 +10,14 @@
 
 <h1>SUCCESS</h1>
 
+<style>
+
+body
+{
+ background-color: lightgrey;
+}
+</style>
+
 <a href="index.jsp"> <input type="submit" value="BACK"/></a>
 
 </body>
