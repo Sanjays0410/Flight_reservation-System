@@ -1,6 +1,6 @@
 <html>
 <body>
-
+ 
 <div align="center">
 
 <h1> FLIGHT RESERVATION SYSTEM</h1>
@@ -20,6 +20,7 @@ marquee
 background-color:orange;
 }
 </style>
+
 <h2>Hello World!</h2>
  
 

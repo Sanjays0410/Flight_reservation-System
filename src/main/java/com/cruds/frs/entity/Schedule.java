@@ -107,15 +107,11 @@ public class Schedule {
 		this.departuretime = departuretime;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Schedule [scheduleid=" + scheduleid + ", flightid=" + flightid + ", routeid=" + routeid
 				+ ", travelduration=" + travelduration + ", availabledays=" + availabledays + ", departuretime="
 				+ departuretime + "]";
 	}
-	
-	
-	
 	
 }
