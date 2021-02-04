@@ -34,16 +34,66 @@ th {
 	color: white;
 }
 
-marquee
-{
-background-color:orange;
+    marquee
+    {
+        color: black;
+        background-color: darkorange;
+    }
+    
+      img {
+  border-radius: 50%;
+}
+
+.butt {
+	background-color: maroon;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
 }
 </style>
 
+<marquee behavior="scroll" direction="left">FLIGHT RESERVTION
+		SYSTEM </marquee>
+	<hr>
+	<h5 align="center">
+		<font color="#001133" size="60"> <img
+			src="resources\img\logo.jpg" width="150" height="150">Flight
+			Reservation System
+		</font>
+	</h5>
 
+
+	<div align="left">
+		<%
+		String msg =(String)session.getAttribute("MESSAGE");
+	
+
+		if (msg != null) {
+	%>
+
+	<h1>
+		<%=msg%></h1>
+	<%
+		}
+	%>
+
+	</div>
+
+	<div align="Right">
+		<h1>
+			<a href="index.jsp"><input type="submit" class="butt"
+				value="Logout"> </a>
+		</h1>
+
+		<hr>
+	</div>
 	<div align="center">
-		<h1>CUSTOMER PAGE</h1>
-
 
 
 		<form action="Customersearch.html" method="post">
@@ -66,7 +116,7 @@ background-color:orange;
 				<option value="Kolkata">Kolkata</option>
 				<option value="Rajasthan">Rajasthan</option>
 			</select> <br> <br> <label for="Availabledays">Choose Days:
-				{to choose multiple days use ctrl} </label> <select name="Availabledays"
+				 </label> <select name="Availabledays"
 				id="Availabledays" required >
 				<option></option>
 				<option value="Monday">Monday</option>
@@ -76,17 +126,29 @@ background-color:orange;
 				<option value="Friday">Friday</option>
 				<option value="Saturday">Saturday</option>
 				<option value="Sunday">Sunday</option>
+				
+				</select> <br> <br> <label for="Seats">Choose no of seats:
+				 </label> <select name="Seats"
+				id="Seats" required >
+				<option></option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				
 			</select> <br> <br> <input type="submit" value="SEARCH" />
 
 
 		</form>
-		<%String msg=(String)request.getAttribute("MESSAGE");
+		<%String msg3=(String)request.getAttribute("MESSAGE");
 	
-	if(msg!=null){%>
+	if(msg3!=null){%>
 
 
 	<h1>
-			<%=msg %></h1>
+			<%=msg3%></h1>
+			
 			
 			<marquee behavior="scroll" direction="left">To view flight name and seats available click on flightid..........To view the Fare chick on Routeid...  </marquee>
 			<br>
@@ -98,7 +160,7 @@ background-color:orange;
 				<tr>
 					<th> FLIGHT ID</th>
 					<th>ROUTE ID</th>
-					<th>TRAVEL DURATION</th>
+					<th>TRAVEL DURATION{IN HRS}</th>
 					<th>AVAILABLE DAYS</th>
 					<th>DEPARTURE TIME</th>
 					<th> BOOK TICKET</th>
@@ -109,8 +171,8 @@ background-color:orange;
 
 				<c:forEach var="f" items="${FLIGHT_LIST}">
 					<tr> 
-						<td> <a href="Viewflightonid?flightid=${f.flightid}">${f.flightid}</a></td>
-						<td><a href="ViewRouteonid?routeid=${f.routeid}">${f.routeid}</a></td>
+						<td> <a href="Viewflightbyid?flightid=${f.flightid}">${f.flightid}</a></td>
+						<td><a href="ViewRoutebyid?routeid=${f.routeid}">${f.routeid}</a></td>
 						<td>${f.travelduration}</td>
 						<td>${f.availabledays}</td>
 						<td>${f.departuretime}</td>
@@ -145,6 +207,13 @@ background-color:orange;
 			<%=msg2 %></h1>
 		<%} %>
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
 	</div>

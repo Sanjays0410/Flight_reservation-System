@@ -169,8 +169,7 @@ background-color:orange;
 				}
 			%>
 		</table>
-		<br> <br> <a href="index.jsp"> <input type="submit"
-			value="BACK" /></a>
+		<br> <br> <input action="action" type="button" value="BACK" onclick="history.go(-1);" />
 
 
 

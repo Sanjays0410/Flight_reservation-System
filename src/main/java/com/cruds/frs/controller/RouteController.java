@@ -111,7 +111,7 @@ public class RouteController {
 		
 		else
 		{
-			request.setAttribute("MESSAGE", "unsuccessfull delete");
+			request.setAttribute("MESSAGE", "unsuccessfull delete its mapped with schedule");
 			return "Routedelete";
 			
 		}

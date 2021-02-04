@@ -1,9 +1,6 @@
 package com.cruds.frs.db;
 
 import java.util.ArrayList;
-
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,7 +89,11 @@ public class FlightDAOImpl  implements FlightDAO{
 		}
 		catch ( java.lang.IllegalArgumentException e) {
 
-			System.out.println("null pointer exception"+e.getMessage());
+			System.out.println(" exception"+e.getMessage());
+			// TODO: handle exception
+			return 0;
+		}
+		catch (org.hibernate.exception.ConstraintViolationException e) {
 			// TODO: handle exception
 			return 0;
 		}
@@ -113,7 +114,7 @@ public class FlightDAOImpl  implements FlightDAO{
 		}
 		catch ( java.lang.NumberFormatException e) {
 
-			System.out.println("nullformat exception");
+			System.out.println(" exception");
 			return false;
 		}
 		catch (org.hibernate.TransientObjectException e) {

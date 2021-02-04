@@ -10,8 +10,13 @@
    http://www.springframework.org/schema/context 
    http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
+	
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.cruds.frs*" />
+
+
 
 
 	<bean id="flightDAO" class="com.cruds.frs.db.FlightDAOImpl">
@@ -38,6 +43,16 @@
 			<ref bean="sessionfactory" />
 		</property>
 	</bean>
+
+
+	<bean id="credentialsDAO" class="com.cruds.frs.db.CredentialsDAOImpl">
+		<property name="sessionfactory">
+			<ref bean="sessionfactory" />
+		</property>
+	</bean>
+
+
+
 
 
 	<bean
@@ -72,6 +87,7 @@
 			</props>
 		</property>
 	</bean>
+
 
 
 </beans>

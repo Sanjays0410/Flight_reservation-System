@@ -8,7 +8,7 @@ import com.cruds.frs.entity.Schedule;
 
 public interface CustomerDAO {
 	
-	public ArrayList<Schedule> viewScheduleByRoute(String source,String Destination,String days);
+	public ArrayList<Schedule> viewScheduleByRoute(String source,String Destination,String day,String seats);
 
 	public Flight viewbyflightid(String flightid);
 	

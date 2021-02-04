@@ -115,7 +115,7 @@ background-color:orange;
 	
 	<br>
 	<br>
-	<a href="index.jsp"> <input type="submit" value="BACK"/></a>
+	<input action="action" type="button" value="BACK" onclick="history.go(-2);" />
 </div>
 </body>
 </html>

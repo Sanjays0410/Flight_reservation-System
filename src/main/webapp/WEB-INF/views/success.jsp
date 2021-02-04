@@ -1,14 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
 <body>
+ 
+<div align="center">
 
-<h1>SUCCESS</h1>
+<h1> FLIGHT RESERVATION SYSTEM</h1>
+<br>
+
+	<marquee behavior="scroll" direction="left">FLIGHT RESERVTION SYSTEM  </marquee>
 
 <style>
 
@@ -16,9 +14,69 @@ body
 {
  background-color: lightgrey;
 }
+
+marquee
+{
+background-color:orange;
+}
 </style>
 
-<a href="index.jsp"> <input type="submit" value="BACK"/></a>
+<h2>Hello World!</h2>
+ 
 
+<br>
+<br>
+<h1> ADMIN PAGE</h1>
+<br>
+<br>
+
+
+<h1> FLIGHT DETAILS</h1>
+
+<a href="flight.html">ENTER FLIGHT DETAILS HERE</a>
+
+<br>
+</br>
+
+<a href="flightlist"> VIEW ALL FLIGHT/Delete Flight/Modify Flight</a>
+
+<br>
+</br>
+
+<h1> ROUTE DETAILS</h1>
+
+<a href="Routeadd.html"> ENTER ROUTE DETAILS</a>
+
+<br>
+<br>
+
+<a href="Routelist.html"> VIEW ALL ROUTE/Delete/Modify</a>
+
+<br>
+<br>
+
+<h1> SCHEDULE DETAILS</h1>
+
+
+<a href="Scheduleadd.html"> ENTER SCHEDULE DETAILS</a>
+
+<br>
+<br>
+
+<a href="Schedulelist.html">VIEW ALL SCHEDULE/DELETE/MODIFY</a>
+
+<br>
+<br>
+
+<h1> CUSTOMER PAGE</h1>
+
+<a href="Customersearch.html"> SEARCH FLIGHT</a>
+
+<br>
+<br>
+<input action="action" type="button" value="BACK" onclick="history.go(-1);" />
+
+</div>
 </body>
 </html>
+

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cruds.frs.entity.Flight;
+import com.cruds.frs.entity.Route;
 import com.cruds.frs.entity.Schedule;
 import com.cruds.frs.service.CustomerService;
 
@@ -34,8 +35,10 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value="/Customersearch",method=RequestMethod.POST)
-	public String doviewSearchbyCustomer( @RequestParam("Source")String source,@RequestParam("Destination")String destination,@RequestParam("Availabledays") String days, Model model,HttpServletRequest request,HttpSession session)
+	public String doviewSearchbyCustomer( @RequestParam("Source")String source,@RequestParam("Destination")String destination,@RequestParam("Availabledays") String days,@RequestParam("Seats") String seats, Model model,HttpServletRequest request,HttpSession session)
 	{
+		int Seats=Integer.parseInt(seats);
+		System.out.println(Seats);
 		if(source.equals(destination))
 		{
 			request.setAttribute("CHECK", "pLEASE change source or destination U entered \n"+source+"\n on both");
@@ -45,7 +48,7 @@ public class CustomerController {
 
 		}
 
-		else if(service.viewScheduleByRoute(source, destination, days).isEmpty())
+		else if(service.viewScheduleByRoute(source, destination, days,seats).isEmpty())
 		{
 			request.setAttribute("NO_FLIGHT", " NO Flight on\n"+days+"\n :(");
 
@@ -53,30 +56,56 @@ public class CustomerController {
 		}
 		else 
 		{
-			model.addAttribute("FLIGHT_LIST",service.viewScheduleByRoute(source, destination, days));
-			request.setAttribute("MESSAGE", "Flights found :)");
+			model.addAttribute("FLIGHT_LIST",service.viewScheduleByRoute(source, destination, days,seats));
+			request.setAttribute("MESSAGE", "FLIGHTS FOUND :)");
 
 			return "CustomerSearch";
 		}
 
 	}
 	
-	@RequestMapping(value="/Viewflightonid",method=RequestMethod.GET)
-	public String viewflightbasedonID(@RequestParam("flightid")String flightid)
+	@RequestMapping(value="/Viewflightbyid",method=RequestMethod.GET)
+	public String viewflightbasedonID(@RequestParam("flightid")String flightid,Model model)
 	{
 		System.out.println(flightid);
+		
 		Flight flightbean=service.viewbyflightid(flightid);
+		
+		model.addAttribute("FLIGHT_ID",flightbean.getFlightid());
+		model.addAttribute("FLIGHT_NAME",flightbean.getFlightname());
+		model.addAttribute("SEATS_AVAILABLE",flightbean.getReservationcapacity());
+		
+		int seats=flightbean.getReservationcapacity()-5;
+		
+		System.out.println(seats);
+		
+		
 		 
-		System.out.println(flightbean);
-		
-		System.out.println(flightbean.getFlightname());
-		
-		
-		 
-		return "CustomerSearch";
+		return "CustomerFlightbyid";
 		
 	}
-
+	
+	
+	@RequestMapping(value="/ViewRoutebyid",method=RequestMethod.GET)
+	public String viewRoutebasedonID(@RequestParam("routeid")String Routeid,Model model)
+	{
+		System.out.println(Routeid);
+		
+		Route routebean=service.viewbyRouteid(Routeid);
+		
+		model.addAttribute("ROUTE_ID",routebean.getRouteid());
+		model.addAttribute("SOURCE",routebean.getSource());
+		model.addAttribute("DESTINATION",routebean.getDestination());
+		model.addAttribute("DISTANCE",routebean.getDistance());
+		model.addAttribute("FARE",routebean.getFare());
+		
+		
+		 
+		return "CustomerRoutebyid";
+		
+	}
+	
+	
 
 
 
